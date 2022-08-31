@@ -70,7 +70,7 @@ return require('packer').startup({function(use)
     use 'nvim-treesitter/nvim-treesitter'
 
     -- Inspector --
-    use 'puremourning/vimspector'
+    -- use 'puremourning/vimspector'
 
     -- Terminal --
     use 'voldikss/vim-floaterm'

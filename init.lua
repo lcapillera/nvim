@@ -8,7 +8,7 @@ vim.g.localleader = "\\"
 
 -- IMPORTS
 require('vars')      -- Variables
--- require('opts')      -- Options
+require('opts')      -- Options
 require('keys')      -- Keymaps
 require('plug')      -- Plugins
 
@@ -49,106 +49,94 @@ require('nvim-autopairs').setup{}
 require('mason').setup{}
 require('mason-lspconfig').setup{}
 
-
--- `on_attach` callback will be called after a language server
--- instance has been attached to an open buffer with matching filetype
--- here we're setting key mappings for hover documentation, goto definitions, goto references, etc
--- you may set those key mappings based on your own preference
--- local on_attach = function(client, bufnr)
---   local opts = { noremap=true, silent=true }
-
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
--- end
-
--- setting up the elixir language server
--- you have to manually specify the entrypoint cmd for elixir-ls
-
--- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
--- require('lspconfig').elixirls.setup {
---   cmd = { "/Users/leo/.cache/nvim/lspconfig/elixirls/elixir-ls/release/language_server.sh" },
---   on_attach = on_attach,
---   capabilities = capabilities
--- }
 require('lspconfig').elixirls.setup{}
 
-local cmp = require'cmp'
+-- LSP Diagnostics Options Setup
+local sign = function(opts)
+  vim.fn.sign_define(opts.name, {
+    texthl = opts.name,
+    text = opts.text,
+    numhl = ''
+  })
+end
 
+sign({name = 'DiagnosticSignError', text = ''})
+sign({name = 'DiagnosticSignWarn', text = ''})
+sign({name = 'DiagnosticSignHint', text = ''})
+sign({name = 'DiagnosticSignInfo', text = ''})
+
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = false,
+    float = {
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
+})
+
+vim.cmd([[
+set signcolumn=yes
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
+
+
+-- Completion Plugin Setup
+local cmp = require'cmp'
 cmp.setup({
+  -- Enable LSP snippets
   snippet = {
     expand = function(args)
-      -- setting up snippet engine
-      -- this is for vsnip, if you're using other
-      -- snippet engine, please refer to the `nvim-cmp` guide
-      vim.fn["vsnip#anonymous"](args.body)
+        vim.fn["vsnip#anonymous"](args.body)
     end,
   },
   mapping = {
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    -- Add tab support
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    })
   },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
-    { name = 'buffer' }
-  })
+  -- Installed sources:
+  sources = {
+    { name = 'path' },                              -- file paths
+    { name = 'nvim_lsp', keyword_length = 3 },      -- from language server
+    { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized
+    { name = 'nvim_lua', keyword_length = 2},       -- complete neovim's Lua runtime API such vim.lsp.*
+    { name = 'buffer', keyword_length = 2 },        -- source current buffer
+    { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip
+    { name = 'calc'},                               -- source for math calculation
+  },
+  window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+  },
+  formatting = {
+      fields = {'menu', 'abbr', 'kind'},
+      format = function(entry, item)
+          local menu_icon ={
+              nvim_lsp = 'λ',
+              vsnip = '⋗',
+              buffer = 'Ω',
+              path = '🖫',
+          }
+          item.menu = menu_icon[entry.source.name]
+          return item
+      end,
+  },
 })
-
--- helper functions
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
-local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
-cmp.setup({
-  -- other settings ...
-  mapping = {
-    -- other mappings ...
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-  cmp.select_next_item()
-      elseif vim.fn["vsnip#available"](1) == 1 then
-  feedkey("<Plug>(vsnip-expand-or-jump)", "")
-      elseif has_words_before() then
-  cmp.complete()
-      else
-  fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() then
-  cmp.select_prev_item()
-      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-  feedkey("<Plug>(vsnip-jump-prev)", "")
-      end
-    end, { "i", "s" })
-  }
-})
-
-
--- require'nvim-treesitter.configs'.setup {
---   ensure_installed = "maintained",
---   sync_install = false,
---   ignore_install = { },
---   highlight = {
---     enable = true,
---     disable = { }
---   },
--- }
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = { "lua", "rust", "toml", "elixir" },
