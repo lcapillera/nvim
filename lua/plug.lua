@@ -37,7 +37,7 @@ return require('packer').startup({function(use)
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
     use 'majutsushi/tagbar'                         -- code structure
-    use 'Yggdroot/indentLine'                       -- see indentation
+    -- use 'Yggdroot/indentLine'                       -- see indentation
     use 'tpope/vim-fugitive'                        -- git integration
     use 'junegunn/gv.vim'                           -- commit history
     use 'windwp/nvim-autopairs'
@@ -76,7 +76,7 @@ return require('packer').startup({function(use)
     use 'voldikss/vim-floaterm'
 
     -- Indent --
-    use 'lukas-reineke/indent-blankline.nvim'
+    -- use 'lukas-reineke/indent-blankline.nvim'
 
     -- Surround --
     use 'tpope/vim-surround'

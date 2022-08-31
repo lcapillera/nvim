@@ -124,16 +124,6 @@ _G.packer_plugins = {
     path = "/Users/leo/.config/nvim/site/pack/packer/start/hlargs.nvim",
     url = "https://github.com/m-demare/hlargs.nvim"
   },
-  ["indent-blankline.nvim"] = {
-    loaded = true,
-    path = "/Users/leo/.config/nvim/site/pack/packer/start/indent-blankline.nvim",
-    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
-  },
-  indentLine = {
-    loaded = true,
-    path = "/Users/leo/.config/nvim/site/pack/packer/start/indentLine",
-    url = "https://github.com/Yggdroot/indentLine"
-  },
   ["limelight.vim"] = {
     loaded = true,
     path = "/Users/leo/.config/nvim/site/pack/packer/start/limelight.vim",
