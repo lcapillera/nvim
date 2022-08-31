@@ -46,9 +46,11 @@ require('lualine').setup{
   }
 }
 require('nvim-autopairs').setup{}
+
 require('mason').setup{}
 require('mason-lspconfig').setup{}
 
+-- elixirls is installed manually using mason
 require('lspconfig').elixirls.setup{}
 
 -- LSP Diagnostics Options Setup
