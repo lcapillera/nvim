@@ -7,48 +7,12 @@ vim.g.mapleader = ","
 vim.g.localleader = "\\"
 
 -- IMPORTS
--- require('vars')      -- Variables
+require('vars')      -- Variables
 -- require('opts')      -- Options
 -- require('keys')      -- Keymaps
--- require('plug')      -- Plugins
+require('plug')      -- Plugins
 
 -- PLUGINS
-
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-end
-
-require('packer').startup(function(use)
-  -- install all the plugins you need here
-
-  use 'tanvirtin/monokai.nvim'
-
-  -- the plugin manager can manage itself
-  use {'wbthomason/packer.nvim'}
-
-  -- lsp config for elixir-ls support
-  use {'neovim/nvim-lspconfig'}
-
-  -- cmp framework for auto-completion support
-  use {'hrsh7th/nvim-cmp'}
-
-  -- install different completion source
-  use {'hrsh7th/cmp-nvim-lsp'}
-  use {'hrsh7th/cmp-buffer'}
-  use {'hrsh7th/cmp-path'}
-  use {'hrsh7th/cmp-cmdline'}
-
-  -- you need a snippet engine for snippet support
-  -- here I'm using vsnip which can load snippets in vscode format
-  use {'hrsh7th/vim-vsnip'}
-  use {'hrsh7th/cmp-vsnip'}
-
-  -- treesitter for syntax highlighting and more
-  use {'nvim-treesitter/nvim-treesitter'}
-end)
 
 require('monokai').setup {
   italics = false,
@@ -56,9 +20,35 @@ require('monokai').setup {
     base2 = '#131411'
   }
 }
--- require('monokai').setup { palette = require('monokai').pro }
--- require('monokai').setup { palette = require('monokai').soda }
--- require('monokai').setup { palette = require('monokai').ristretto }
+
+require('nvim-web-devicons').setup {}
+require('nvim-tree').setup{
+    sort_by = "case_sensitive",
+    view = {
+        adaptive_size = true,
+        mappings = {
+            list = {
+                { key = "u", action = "dir_up" },
+            },
+        },
+    },
+    renderer = {
+        group_empty = true,
+    },
+    filters = {
+        dotfiles = true,
+    },
+}
+
+require('lualine').setup{
+  options = {
+    theme = 'powerline_dark'
+  }
+}
+require('nvim-autopairs').setup{}
+require('mason').setup{}
+require('mason-lspconfig').setup{}
+
 
 -- `on_attach` callback will be called after a language server
 -- instance has been attached to an open buffer with matching filetype
@@ -159,51 +149,78 @@ cmp.setup({
 --   },
 -- }
 
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all"
-  ensure_installed = { "c", "lua", "rust", "elixir" },
+-- require'nvim-treesitter.configs'.setup {
+--   -- A list of parser names, or "all"
+--   ensure_installed = { "c", "lua", "rust", "elixir" },
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+--   -- Install parsers synchronously (only applied to `ensure_installed`)
+--   sync_install = false,
 
-  -- Automatically install missing parsers when entering buffer
+--   -- Automatically install missing parsers when entering buffer
+--   auto_install = true,
+
+--   -- List of parsers to ignore installing (for "all")
+--   ignore_install = { "javascript" },
+
+--   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+--   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+--   highlight = {
+--     -- `false` will disable the whole extension
+--     enable = true,
+
+--     -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+--     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+--     -- the name of the parser)
+--     -- list of language that will be disabled
+--     disable = { "c", "rust" },
+
+--     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+--     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+--     -- Using this option may slow down your editor, and you may see some duplicate highlights.
+--     -- Instead of true it can also be a list of languages
+--     additional_vim_regex_highlighting = false,
+--   },
+-- }
+
+require('nvim-treesitter.configs').setup {
+  ensure_installed = { "lua", "rust", "toml" },
   auto_install = true,
-
-  -- List of parsers to ignore installing (for "all")
-  ignore_install = { "javascript" },
-
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
   highlight = {
-    -- `false` will disable the whole extension
     enable = true,
-
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    disable = { "c", "rust" },
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
+    additional_vim_regex_highlighting=false,
   },
+  ident = { enable = true },
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+  }
 }
 
--- require('nvim-treesitter.configs').setup {
---   ensure_installed = { "lua", "rust", "toml" },
---   auto_install = true,
---   highlight = {
---     enable = true,
---     additional_vim_regex_highlighting=false,
---   },
---   ident = { enable = true },
---   rainbow = {
---     enable = true,
---     extended_mode = true,
---     max_file_lines = nil,
---   }
--- }
+-- Comment Plugin
+require('Comment').setup()
+
+-- Indent blankline
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    show_current_context_start = true,
+}
+
+require('hlargs').setup()
+
+require('telescope').setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    }
+  }
+}
+-- To get fzf loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require('telescope').load_extension('fzf')
