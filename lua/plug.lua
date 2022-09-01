@@ -105,6 +105,12 @@ return require('packer').startup({function(use)
     -- Hyper focus
     use 'junegunn/limelight.vim'
 
+    -- Credo elixir
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        requires = { {'nvim-lua/plenary.nvim'} }
+    }
+
     -- for bootstrapping --
     if packer_bootstrap then
         require('packer').sync()
