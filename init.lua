@@ -88,6 +88,11 @@ require('lspconfig').elixirls.setup{
   capabilities = capabilities
 }
 
+require('lspconfig').solargraph.setup{
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+
 -- LSP Diagnostics Options Setup
 local sign = function(opts)
   vim.fn.sign_define(opts.name, {
@@ -178,6 +183,7 @@ cmp.setup({
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
     "lua",
+    "ruby",
     "elixir",
     "eex",
     "erlang",
