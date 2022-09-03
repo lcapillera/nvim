@@ -72,6 +72,12 @@ return require('packer').startup({function(use)
     -- Inspector --
     -- use 'puremourning/vimspector'
 
+    -- -- Debug Adapter Protocol client
+    -- use 'mfussenegger/nvim-dap'
+    --
+    -- -- Debug Adapter Protocol client UI
+    -- use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+
     -- Terminal --
     use 'voldikss/vim-floaterm'
 
