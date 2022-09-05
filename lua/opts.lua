@@ -74,3 +74,6 @@ let g:vimspector_terminal_maxwidth = 70
 cmd([[
 set clipboard+=unnamedplus
 ]])
+
+-- Strip whitespaces on save
+cmd('let g:strip_whitespace_on_save = 1')
