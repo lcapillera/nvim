@@ -117,8 +117,11 @@ return require('packer').startup({function(use)
         requires = { {'nvim-lua/plenary.nvim'} }
     }
 
-
+    -- Highlight trailing spaces
     use 'ntpeters/vim-better-whitespace'
+
+    -- Multiline edition
+    use { 'mg979/vim-visual-multi', branch = 'master' }
 
     -- for bootstrapping --
     if packer_bootstrap then
