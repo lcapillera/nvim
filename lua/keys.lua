@@ -49,3 +49,9 @@ vim.cmd([[
 
 -- Abbreviation for pry debugger
 vim.cmd('iab d;; require IEx; IEx.pry()')
+
+-- Move 1 more lines up or down in normal and visual selection modes.
+map('n', 'Q', ":m .-2<CR>==", {})
+map('n', 'A', ":m .+1<CR>==", {})
+map('v', 'Q', ":m '<-2<CR>gv=gv", {})
+map('v', 'A', ":m '>+1<CR>gv=gv", {})
