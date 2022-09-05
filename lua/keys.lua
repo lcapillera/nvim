@@ -5,7 +5,7 @@ local map = vim.api.nvim_set_keymap
 map('i', 'jk', '', {})
 
 -- Toggle nvim-tree
-map('n', '<C-n>', ":NvimTreeToggle <CR>", {})
+map('n', '<C-t>', ":NvimTreeToggle <CR>", {})
 
 -- Toggle more plugins
 map('n', '<leader>l', [[:IndentLinesToggle<CR>]], {})
