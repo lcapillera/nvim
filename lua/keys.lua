@@ -46,3 +46,6 @@ vim.cmd([[
     nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
     nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 ]])
+
+-- Abbreviation for pry debugger
+vim.cmd('iab d;; require IEx; IEx.pry()')
