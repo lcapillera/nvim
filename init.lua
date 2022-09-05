@@ -43,8 +43,17 @@ require('nvim-tree').setup{
 require('lualine').setup{
   options = {
     theme = 'powerline_dark'
+  },
+  sections = {
+    lualine_c = {
+        {
+          'filename',
+          path = 1
+        }
+    }
   }
 }
+
 require('nvim-autopairs').setup{}
 
 require('mason').setup{}
