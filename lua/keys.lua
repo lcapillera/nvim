@@ -55,3 +55,10 @@ map('n', 'Q', ":m .-2<CR>==", {})
 map('n', 'A', ":m .+1<CR>==", {})
 map('v', 'Q', ":m '<-2<CR>gv=gv", {})
 map('v', 'A', ":m '>+1<CR>gv=gv", {})
+
+-- vim-test config
+map('n', 'rn', ":TestNearest<CR>", {})
+map('n', 'rf', ":TestFile<CR>", {})
+map('n', 'rs', ":TestSuite<CR>", {})
+map('n', 'rl', ":TestLast<CR>", {})
+map('n', 'rv', ":TestVisit<CR>", {})

@@ -123,6 +123,9 @@ return require('packer').startup({function(use)
     -- Multiline edition
     use { 'mg979/vim-visual-multi', branch = 'master' }
 
+    -- Run tests
+    use { 'vim-test/vim-test' }
+
     -- for bootstrapping --
     if packer_bootstrap then
         require('packer').sync()
