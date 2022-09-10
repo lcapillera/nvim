@@ -126,6 +126,9 @@ return require('packer').startup({function(use)
     -- Run tests
     use { 'vim-test/vim-test' }
 
+    -- Highlight current line
+    use { 'miyakogi/conoline.vim' }
+
     -- for bootstrapping --
     if packer_bootstrap then
         require('packer').sync()

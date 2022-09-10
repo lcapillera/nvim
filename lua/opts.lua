@@ -80,4 +80,7 @@ cmd('let g:strip_whitespace_on_save = 1')
 
 -- Run vim-test on vertical window
 cmd('let test#strategy = "neovim"')
-cmd('let test#neovim#term_position = "vert"')
+-- cmd('let test#neovim#term_position = "vert"')
+
+-- Set miyakogi/conoline.vim background color
+cmd('let g:conoline_color_normal_dark = "guibg=#000000"')
