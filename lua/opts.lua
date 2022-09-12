@@ -37,7 +37,9 @@ opt.splitright = true            -- bool: Place new window to right of current o
 opt.splitbelow = true            -- bool: Place new window below the current one
 
 -- [[ Font ]]
-opt.guifont = 'Hack:14'
+-- Font is being set on the terminal
+-- https://www.nerdfonts.com/font-downloads
+opt.guifont = 'MesloLGS Nerd Font Mono'
 
 --Set completeopt to have a better completion experience
 -- :help completeopt
