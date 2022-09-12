@@ -77,6 +77,7 @@ set clipboard+=unnamedplus
 
 -- Strip whitespaces on save
 cmd('let g:strip_whitespace_on_save = 1')
+cmd('let g:strip_whitespace_confirm = 0')
 
 -- Run vim-test on vertical window
 cmd('let test#strategy = "neovim"')
