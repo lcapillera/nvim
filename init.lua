@@ -45,6 +45,8 @@ require('nvim-tree').setup{
     },
 }
 
+require("symbols-outline").setup()
+
 require('lualine').setup{
   options = {
     theme = 'powerline_dark'

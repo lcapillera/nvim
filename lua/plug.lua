@@ -129,6 +129,9 @@ return require('packer').startup({function(use)
     -- Highlight current line
     use { 'miyakogi/conoline.vim' }
 
+    -- A tree like view for symbols
+    use { 'simrat39/symbols-outline.nvim' }
+
     -- for bootstrapping --
     if packer_bootstrap then
         require('packer').sync()
