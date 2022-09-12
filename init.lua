@@ -18,6 +18,11 @@ require('monokai').setup {
   italics = false,
   palette = {
     base2 = '#131411'
+  },
+  custom_hlgroups = {
+    Identifier = {
+        fg = '#fa9f6b',
+    },
   }
 }
 
