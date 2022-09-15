@@ -141,6 +141,9 @@ return require('packer').startup({function(use)
     use { 'ray-x/sad.nvim' }
     use { 'ray-x/guihua.lua' }  --lua GUI lib
 
+    -- Allow edit/open files using semicolon. Ex. ":e path/to/file.ext:100:12"
+    use 'wsdjeg/vim-fetch'
+
     -- for bootstrapping --
     if packer_bootstrap then
         require('packer').sync()
