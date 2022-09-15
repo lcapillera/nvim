@@ -132,6 +132,10 @@ return require('packer').startup({function(use)
     -- A tree like view for symbols
     use { 'simrat39/symbols-outline.nvim' }
 
+    -- Seach and replace
+    use { 'ray-x/sad.nvim' }
+    use { 'ray-x/guihua.lua' }  --lua GUI lib
+
     -- for bootstrapping --
     if packer_bootstrap then
         require('packer').sync()

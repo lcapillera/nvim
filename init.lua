@@ -109,8 +109,6 @@ require('lspconfig').solargraph.setup{
   capabilities = capabilities
 }
 
-
-
 -- local dap = require('dap')
 -- dap.adapters.mix_task = {
 --   type = 'executable',
@@ -176,7 +174,6 @@ vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
-
 
 -- Completion Plugin Setup
 local cmp = require'cmp'
@@ -286,4 +283,14 @@ require("null-ls").setup({
   sources = {
     require("null-ls").builtins.diagnostics.credo,
   }
+})
+
+require'sad'.setup({
+  diff = 'delta', -- you can use `diff`, `diff-so-fancy`
+  ls_file = 'fd', -- also git ls_file
+  exact = false, -- exact match
+  vsplit = true, -- split sad window the screen vertically, when set to number
+  -- it is a threadhold when window is larger than the threshold sad will split vertically,
+  height_ratio = 0.6, -- height ratio of sad window when split horizontally
+  width_ratio = 0.6, -- height ratio of sad window when split vertically
 })
