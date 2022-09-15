@@ -83,7 +83,7 @@ cmd('let g:strip_whitespace_confirm = 0')
 
 -- Run vim-test on vertical window
 cmd('let test#strategy = "neovim"')
--- cmd('let test#neovim#term_position = "vert"')
+cmd('let test#neovim#term_position = "vert"')
 cmd('let test#elixir#exunit#options = "--trace"')
 
 -- Set miyakogi/conoline.vim background color
