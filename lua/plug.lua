@@ -42,6 +42,7 @@ return require('packer').startup({function(use)
     -- Git integration
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb' -- open the current file on Github
+    use 'airblade/vim-gitgutter'
 
     use 'junegunn/gv.vim'                           -- commit history
     use 'windwp/nvim-autopairs'
