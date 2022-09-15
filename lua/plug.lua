@@ -38,7 +38,11 @@ return require('packer').startup({function(use)
 
     use 'majutsushi/tagbar'                         -- code structure
     -- use 'Yggdroot/indentLine'                       -- see indentation
-    use 'tpope/vim-fugitive'                        -- git integration
+
+    -- Git integration
+    use 'tpope/vim-fugitive'
+    use 'tpope/vim-rhubarb' -- open the current file on Github
+
     use 'junegunn/gv.vim'                           -- commit history
     use 'windwp/nvim-autopairs'
 
