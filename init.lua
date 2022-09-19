@@ -39,6 +39,15 @@ require('nvim-tree').setup{
     },
     renderer = {
         group_empty = true,
+        icons = {
+          show = {
+            file = false
+          }
+        },
+        indent_markers = {
+          enable = true,
+          inline_arrows = true,
+        },
     },
     filters = {
         dotfiles = true,
