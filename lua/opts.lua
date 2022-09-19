@@ -88,3 +88,11 @@ cmd('let test#elixir#exunit#options = "--trace"')
 
 -- Set miyakogi/conoline.vim background color
 cmd('let g:conoline_color_normal_dark = "guibg=#000000"')
+
+-- Hide file icons from nvim-tree
+vim.g.nvim_tree_show_icons = {
+  git = 1,
+  folders = 1,
+  files = 0,
+  folder_arrows = 1,
+}
