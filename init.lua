@@ -41,12 +41,16 @@ require('nvim-tree').setup{
         group_empty = true,
         icons = {
           show = {
-            file = false
+            file = false,
+            git = false
           }
         },
         indent_markers = {
           enable = true,
           inline_arrows = true,
+          icons = {
+            corner = "│",
+          },
         },
     },
     filters = {
