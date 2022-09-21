@@ -38,6 +38,7 @@ require('nvim-tree').setup{
         },
     },
     renderer = {
+        add_trailing = true,
         group_empty = true,
         icons = {
           show = {
@@ -46,11 +47,7 @@ require('nvim-tree').setup{
           }
         },
         indent_markers = {
-          enable = true,
-          inline_arrows = true,
-          icons = {
-            corner = "│",
-          },
+          enable = false
         },
     },
     filters = {
