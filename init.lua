@@ -125,6 +125,11 @@ require('lspconfig').tsserver.setup{
   cmd = { "typescript-language-server", "--stdio" }
 }
 
+require('lspconfig').html.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 -- local dap = require('dap')
 -- dap.adapters.mix_task = {
 --   type = 'executable',
