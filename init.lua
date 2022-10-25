@@ -119,6 +119,12 @@ require('lspconfig').solargraph.setup{
   capabilities = capabilities
 }
 
+require('lspconfig').tsserver.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { "typescript-language-server", "--stdio" }
+}
+
 -- local dap = require('dap')
 -- dap.adapters.mix_task = {
 --   type = 'executable',
@@ -248,6 +254,7 @@ require('nvim-treesitter.configs').setup {
     "heex",
     "html",
     "surface",
+    "javascript",
   },
   auto_install = true,
   highlight = {
