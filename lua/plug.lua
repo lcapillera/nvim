@@ -46,6 +46,7 @@ return require('packer').startup({function(use)
 
     use 'junegunn/gv.vim'                           -- commit history
     use 'windwp/nvim-autopairs'
+    use 'windwp/nvim-ts-autotag'
 
     -- [[ LSP ]]
     use 'williamboman/mason.nvim'
